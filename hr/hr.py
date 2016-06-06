@@ -28,12 +28,12 @@ def start_module():
                "Back to the main menu"]
     while True:
         ui.print_menu(title, options, exit_message)
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["\nPlease enter a number: "], "")
         option = int(inputs[0])
         if option == 1:
-            show_table()
+            show_table(data_manager.get_table_from_file("persons.csv"))
         elif option == 2:
-            add()
+            add(data_manager.get_table_from_file("persons.csv"))
         elif option == 3:
             remove()
         elif option == 4:
@@ -48,22 +48,22 @@ def start_module():
             raise KeyError("There is no such option.")
         pass
 
-# start()
+
+
 # print the default table of records from the file
 def show_table(table):
-
-
+    ui.print_table(table, ["id", "names", "year of birth"])
     pass
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-
-    # your code
+    name = ui.get_inputs(["Please enter the name: "], "")
+    year_of_birth = ui.get_inputs(["Please enter the year of birth: "], "")
 
     return table
 
-
+# start()
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
 
