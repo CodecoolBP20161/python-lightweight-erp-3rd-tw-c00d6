@@ -20,7 +20,7 @@ common = SourceFileLoader("module.name", current_file_path + "/../common.py").lo
 
 
 # start this manager by a menu
-def start():
+def start_module():
     menu_options = ["Show tool table,",
                     "Add tool,",
                     "Remove tool,",
@@ -29,33 +29,32 @@ def start():
                     "Get average durability by manufacturers,"]
     while True:
         ui.print_menu("Tool Manager", menu_options, "Back to Main menu")
-        option = ui.get_inputs("Please select an option: ", "")
-        if option == "1":
+        tool_option = ui.get_inputs(["Please select an option: "], "")
+        if tool_option == "1":
             show_table(data_manager.get_table_from_file("tools.csv"))
-        elif option == "2":
+        elif tool_option == "2":
             data_manager.write_table_to_file(add(data_manager.get_table_from_file("tools.csv")))
-        elif option == "3":
+        elif tool_option == "3":
             data_manager.write_table_to_file(remove(data_manager.get_table_from_file("tools.csv")))
-        elif option == "4":
+        elif tool_option == "4":
             data_manager.write_table_to_file(update(data_manager.get_table_from_file("tools.csv")))
-        elif option == "5":
+        elif tool_option == "5":
             get_available_tools(data_manager.get_table_from_file("tools.csv"))
-        elif option == "6":
+        elif tool_option == "6":
             get_average_durability_by_manufacturers(data_manager.get_table_from_file("tools.csv"))
-        elif option == "0":
+        elif tool_option == "0":
             break
 
 
 # print the default table of records from the file
 def show_table(table):
-    ui.print_table(table, ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)" ])
-
+    ui.print_table(table, ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"])
+    pass
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
     list_of_titles = ["Please enter the person's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
-
 
     return table
 
@@ -96,4 +95,3 @@ def get_average_durability_by_manufacturers(table):
     # your code
 
     pass
-start()

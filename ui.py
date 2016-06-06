@@ -48,7 +48,7 @@ def print_menu(title, list_options, exit_message):
 def get_inputs(list_titles, title):
     record = []
     for item in list_titles:
-        record_to_add = input('%s' % item)
+        record_to_add = input('%s' % (item))
         record.append(record_to_add)
     return record
 

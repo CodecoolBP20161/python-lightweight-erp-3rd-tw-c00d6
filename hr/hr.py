@@ -16,7 +16,7 @@ data_manager = SourceFileLoader("module.name", current_file_path + "/../data_man
 
 
 # start this manager by a menu
-def start():
+def start_module():
     title = "Human resources manager: "
     exit_message = "Back to the main menu"
     options = ["Show the table",
@@ -28,14 +28,14 @@ def start():
                "Back to the main menu"]
     while True:
         ui.print_menu(title, options, exit_message)
-        inputs = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["\nPlease enter a number: "], "")
         option = int(inputs[0])
         if option == 1:
-            show_table()
+            show_table(data_manager.get_table_from_file("persons.csv"))
         elif option == 2:
-            add()
+            add(data_manager.get_table_from_file("persons.csv"))
         elif option == 3:
-            remove()
+            remove(data_manager.get_table_from_file("persons.csv"), 'id')
         elif option == 4:
             update()
         elif option == 5:
@@ -48,29 +48,38 @@ def start():
             raise KeyError("There is no such option.")
         pass
 
-# start()
+
 # print the default table of records from the file
 def show_table(table):
-
-
+    ui.print_table(table, ["id", "names", "year of birth"])
     pass
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-
-    # your code
-
+    ID = ['gjdnjasn']
+    name = ui.get_inputs(["Please enter the name: "], "")
+    year_of_birth = ui.get_inputs(["Please enter the year of birth: "], "")
+    new_item = [ID + name + year_of_birth]
+    table += new_item
+    data_manager.write_table_to_file("persons.csv", table)
     return table
 
 
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-
-    # your code
-
+    removing_id = ui.get_inputs(["Please enter the ID, that you want to remove: "], "")
+    correct_rem_id = removing_id[0]
+    id_table = []
+    for lines in table:
+        id_table.append(lines[0])
+    for y in range(len(id_table)):
+        if correct_rem_id in id_table[y]:
+            table.pop(y)
+            data_manager.write_table_to_file("persons.csv", table)
+    show_table(table)
     return table
-
+start_module()
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
