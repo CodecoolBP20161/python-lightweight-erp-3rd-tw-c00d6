@@ -39,9 +39,9 @@ def print_menu(title, list_options, exit_message):
 # see the function call in main.py
 def get_inputs(list_titles, title):
     record = []
-
-    # your code
-
+    for item in list_titles:
+        record_to_add = input('Enter the %s' %item)
+        record.append(record_to_add)
     return record
 
 
