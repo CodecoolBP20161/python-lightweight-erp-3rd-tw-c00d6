@@ -40,10 +40,10 @@ def print_menu(title, list_options, exit_message): #list_options is menu options
 
 
 # see the function call in main.py
-def get_inputs(list_titles, title): #add the title of input, as a list eg: id. 
+def get_inputs(list_titles, title): #please add the full question in your list_titles. eg: ["enter the title", ".....ect]
     record = []
     for item in list_titles:
-        record_to_add = input('Enter the %s' %item)
+        record_to_add = input(%s)
         record.append(record_to_add)
     return record
 
