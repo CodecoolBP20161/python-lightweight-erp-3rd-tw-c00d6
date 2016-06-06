@@ -16,7 +16,7 @@ data_manager = SourceFileLoader("module.name", current_file_path + "/../data_man
 
 
 # start this manager by a menu
-def start():
+def start_module():
     title = "Human resources manager: "
     exit_message = "Back to the main menu"
     options = ["Show the table",
