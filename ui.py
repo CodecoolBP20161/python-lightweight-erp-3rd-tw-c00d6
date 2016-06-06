@@ -8,9 +8,9 @@
 # |--------|----------------|---------|
 # |   1    |       fo       |    fps  |
 # \-----------------------------------/
-def print_table(table, title_list):
+def print_table(table, title_list): #table: the list of results, title_list: the title of data, eg: id, title, ect.
     print (title_list)
-    print ('')
+    print ('') #i will design it later, be patient ;)
     for line in table:
         print (line)
 
@@ -29,15 +29,18 @@ def print_table(table, title_list):
 # (0) Exit program
 #
 # see the function call in main.py
-def print_menu(title, list_options, exit_message):
-
+def print_menu(title, list_options, exit_message): #list_options is menu options, in a list. exit_message the last option, eg: back to main menu
+    print (title)
+    for option in list_options:
+        print ('(%i) %s' % ((list_options.index(option)+1), option))
+    print ('(0) %s' % exit_message)
     # your code
 
     pass
 
 
 # see the function call in main.py
-def get_inputs(list_titles, title):
+def get_inputs(list_titles, title): #add the title of input, as a list eg: id. 
     record = []
     for item in list_titles:
         record_to_add = input('Enter the %s' %item)
