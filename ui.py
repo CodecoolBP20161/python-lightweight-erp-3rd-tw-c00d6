@@ -8,12 +8,13 @@
 # |--------|----------------|---------|
 # |   1    |       fo       |    fps  |
 # \-----------------------------------/
-def print_table(table, title_list): #table: the list of results, title_list: the title of data, eg: id, title, ect.
+# table: the list of results, title_list: the title of data, eg: id,
+# title, ect.
+def print_table(table, title_list):
     print (title_list)
-    print ('') #i will design it later, be patient ;)
+    print ('')  # i will design it later, be patient ;)
     for line in table:
         print (line)
-
 
     pass
 
@@ -29,10 +30,12 @@ def print_table(table, title_list): #table: the list of results, title_list: the
 # (0) Exit program
 #
 # see the function call in main.py
-def print_menu(title, list_options, exit_message): #list_options is menu options, in a list. exit_message the last option, eg: back to main menu
-    print (title)
+# list_options is menu options, in a list. exit_message the last option,
+# eg: back to main menu
+def print_menu(title, list_options, exit_message):
+    print ('%s \n \n' % title)
     for option in list_options:
-        print ('(%i) %s' % ((list_options.index(option)+1), option))
+        print ('(%i) %s' % ((list_options.index(option) + 1), option))
     print ('(0) %s' % exit_message)
     # your code
 
@@ -40,10 +43,12 @@ def print_menu(title, list_options, exit_message): #list_options is menu options
 
 
 # see the function call in main.py
-def get_inputs(list_titles, title): #please add the full question in your list_titles. eg: ["enter the title", ".....ect]
+# please add the full question in your list_titles. eg: ["enter the
+# title", ".....ect]
+def get_inputs(list_titles, title):
     record = []
     for item in list_titles:
-        record_to_add = input(%s)
+        record_to_add = input('%s')
         record.append(record_to_add)
     return record
 
@@ -51,6 +56,6 @@ def get_inputs(list_titles, title): #please add the full question in your list_t
 # see the function call in main.py
 def print_error_message(message):
 
-    # your code
+    print ("Error!")
 
     pass
