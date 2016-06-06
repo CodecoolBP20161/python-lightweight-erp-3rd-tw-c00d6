@@ -95,4 +95,3 @@ def get_average_durability_by_manufacturers(table):
     # your code
 
     pass
-start()
