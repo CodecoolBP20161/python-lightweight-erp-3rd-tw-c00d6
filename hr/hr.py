@@ -35,7 +35,7 @@ def start_module():
         elif option == 2:
             add(data_manager.get_table_from_file("persons.csv"))
         elif option == 3:
-            remove(data_manager.get_table_from_file("persons.csv"))
+            remove(data_manager.get_table_from_file("persons.csv"), 'id')
         elif option == 4:
             update()
         elif option == 5:
@@ -47,7 +47,6 @@ def start_module():
         else:
             raise KeyError("There is no such option.")
         pass
-
 
 
 # print the default table of records from the file
@@ -65,14 +64,22 @@ def add(table):
     table += new_item
     data_manager.write_table_to_file("persons.csv", table)
     return table
-start_module()
+
+
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-
-    # your code
-
+    removing_id = ui.get_inputs(["Please enter the ID, that you want to remove: "], "")
+    correct_rem_id = removing_id[0]
+    id_table = []
+    for lines in table:
+        id_table.append(lines[0])
+    for y in range(len(id_table)):
+        if correct_rem_id in id_table[y]:
+            table.pop(y)
+            data_manager.write_table_to_file("persons.csv", table)
+    show_table(table)
     return table
-
+start_module()
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
