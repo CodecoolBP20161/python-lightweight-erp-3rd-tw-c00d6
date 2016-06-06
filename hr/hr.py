@@ -17,16 +17,41 @@ data_manager = SourceFileLoader("module.name", current_file_path + "/../data_man
 
 # start this manager by a menu
 def start():
+    title = "Human resources manager: "
+    exit_message = "Back to the main menu"
+    options = ["Show the table",
+               "Add to table",
+               "Remove form table",
+               "Update the table",
+               "Get the oldest person(s)",
+               "Get the closest persons(s) to average",
+               "Back to the main menu"]
+    while True:
+        ui.print_menu(title, options, exit_message)
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = int(inputs[0])
+        if option == 1:
+            show_table()
+        elif option == 2:
+            add()
+        elif option == 3:
+            remove()
+        elif option == 4:
+            update()
+        elif option == 5:
+            get_oldest_person()
+        elif option == 6:
+            get_persons_closest_to_average()
+        elif option == 0:
+            break
+        else:
+            raise KeyError("There is no such option.")
+        pass
 
-    # you code
-
-    pass
-
-
+# start()
 # print the default table of records from the file
 def show_table(table):
 
-    # your code
 
     pass
 
