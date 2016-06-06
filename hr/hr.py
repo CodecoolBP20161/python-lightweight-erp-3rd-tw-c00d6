@@ -35,7 +35,7 @@ def start_module():
         elif option == 2:
             add(data_manager.get_table_from_file("persons.csv"))
         elif option == 3:
-            remove()
+            remove(data_manager.get_table_from_file("persons.csv"))
         elif option == 4:
             update()
         elif option == 5:
@@ -58,12 +58,14 @@ def show_table(table):
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
+    ID = ['gjdnjasn']
     name = ui.get_inputs(["Please enter the name: "], "")
     year_of_birth = ui.get_inputs(["Please enter the year of birth: "], "")
-
+    new_item = [ID + name + year_of_birth]
+    table += new_item
+    data_manager.write_table_to_file("persons.csv", table)
     return table
-
-# start()
+start_module()
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
 
