@@ -16,13 +16,46 @@ ui = SourceFileLoader("module.name", current_file_path + "/../ui.py").load_modul
 # data manager module
 data_manager = SourceFileLoader("module.name", current_file_path + "/../data_manager.py").load_module()
 
+title = 'Store Manager'
+list_titles = ['id',
+               'title',
+               'manufacturer',
+               'price',
+               'in_stock']
+
 
 # start this manager by a menu
-def start():
+def start_module():
+    list_options = ['(0) Exit',
+                    '(1) Show_table',
+                    '(2) Add',
+                    '(3) Remove',
+                    '(4) Update',
+                    '(5) Get counts by manufacturer',
+                    '(6) Get avarage by manufacturer'
+                    '(7) Back to main menu']
+    exit_message = 'Back to main menu'
 
-    # you code
-
-    pass
+    while True:
+        ui.print_menu(title, list_options, exit_message)
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = int(inputs[0])
+        if option == 1:
+            show_table(data.manager.get_table_from_file('games.csv'))
+        elif option == 2:
+            add(table)
+        elif option == 3:
+            remove(table, id_)
+        elif option == 4:
+            update(table, id_)
+        elif option == 5:
+            get_counts_by_manufacturers(table)
+        elif option == 6:
+            get_average_by_manufacturer(table, manufacturer)
+        elif option == 0:
+            break
+        else:
+            raise KeyError("There is no such option.")
 
 
 # print the default table of records from the file
