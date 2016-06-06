@@ -9,8 +9,11 @@
 # |   1    |       fo       |    fps  |
 # \-----------------------------------/
 def print_table(table, title_list):
+    print (title_list)
+    print ('')
+    for line in table:
+        print (line)
 
-    # your code
 
     pass
 
