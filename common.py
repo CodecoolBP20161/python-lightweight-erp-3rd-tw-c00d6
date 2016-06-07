@@ -22,7 +22,7 @@ def generate_random(table):
 
     pass
 
-def sorting(table, index, index_of_result):
+def sorting(table, index):
     all_items = []
     sorted_list = [table[1][index]]
     for line in table:
