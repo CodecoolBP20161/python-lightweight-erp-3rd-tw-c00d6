@@ -10,7 +10,7 @@
 
 
 # importing everything you need
-import os
+import os, common
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
@@ -20,10 +20,43 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 # common module
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
+title = "selling manager"
+
 
 # start this manager by a menu
 def start():
+    print ('inside')
+    list_options = ['Show_table',
+                    'Add',
+                    'Remove',
+                    'Update',
+                    'Get the id of the lower price item',
+                    'Get itmens sold between the given days']
+    exit_message = 'Back to main menu'
 
+    while True:
+        ui.print_menu(title, list_options, exit_message)
+        path = os.path.dirname(os.path.abspath(__file__)) + "/sellings.csv"
+        table = data_manager.get_table_from_file(path)
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = str(inputs[0])
+        if option == '1':
+            show_table(table)
+        elif option == '2':
+            data_manager.write_table_to_file(path, add(table))
+        elif option == '3':
+            id = ui.get_inputs(['Enter the ID: '], '')[0]
+            data_manager.write_table_to_file(path, remove(table, id))
+        elif option == '4':
+            update(table, id_)
+        elif option == '5':
+            get_lowest_price_item_id(table)
+        elif option == '6':
+            get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+        elif option == '0':
+            break
+        else:
+            raise KeyError("There is no such option.")
     # you code
 
     pass
@@ -31,25 +64,36 @@ def start():
 
 # print the default table of records from the file
 def show_table(table):
+    print ('I am in')
+    list_titles = ['id',
+                   'title',
+                   'price',
+                   'month',
+                   'day',
+                   'year']
+    ui.print_table(table, list_titles)
 
-    # your code
-
-    pass
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-
-    # your code
+    list_titles = ['title',
+                   'price',
+                   'month',
+                   'day',
+                   'year']
+    new_item = [common.generate_random(table)] + ui.get_inputs(list_titles, table)
+    table.append(new_item)
 
     return table
 
 
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-
-    # your code
-
+    for line in table:
+        if line[0] == id_:
+            to_remove = table.index(line)
+    del table[to_remove]
     return table
 
 
