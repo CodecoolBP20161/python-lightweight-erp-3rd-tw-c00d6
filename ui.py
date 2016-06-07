@@ -12,18 +12,36 @@
 # title, ect.
 def print_table(table, title_list):
     item_length = []
+    num_of_titles = len(title_list)
     for line in table:
         for item in line:
             item_length.append(len(item))
-    column = max(item_length) + 3
+    if max(item_length) % 2 == 0:
+        half_column = int((max(item_length) + 2)/2)
+    else:
+        half_column = int((max(item_length) + 3)/2)
     print ('\n')
+    print ('column: %i' % half_column)
     for item in title_list:
-        print(item, end=((' '*(column-len(item))) + '|  '))
-    print ('\n' + ('=' * (3*column + 7)))
+        if len(item) % 2 == 0:
+            begin_space = int(half_column - len(item)/2)
+            end_space = begin_space
+        else:
+            begin_space = int(half_column - (len(item)+1)/2)
+            end_space = begin_space + 1
+        print((' '* begin_space) + item + (' '*end_space) + '|',  end=(''))
+    print ('\n' + ('=' * (num_of_titles*(half_column*2 + 1))))
     for line in table:
         for item in line:
-            print(item, end=((' '*(column-len(item))) + '|  '))
-        print ("\n" + ('-' * column) + '+' + ('-' * (column+2)) + '+' + ('-' * (column+2)) + '+' )
+            if len(item) % 2 == 0:
+                begin_space = int(half_column - len(item)/2)
+                end_space = begin_space
+            else:
+                begin_space = int(half_column - (len(item)+1)/2)
+                end_space = begin_space + 1
+            print((' '* begin_space) + item + (' '*end_space) + '|',  end=(''))
+        print ("\n" + (('-'*2*half_column) + '|')*num_of_titles)
+
 
     pass
 
