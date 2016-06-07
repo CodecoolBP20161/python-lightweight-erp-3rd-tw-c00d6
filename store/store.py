@@ -24,7 +24,7 @@ list_titles = ['id',
                'in_stock']
 
 # start this manager by a menu
-#def start_module():
+def start_module():
 
     # you code
 
