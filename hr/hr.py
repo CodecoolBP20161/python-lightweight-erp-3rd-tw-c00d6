@@ -13,10 +13,10 @@ current_file_path = os.path.dirname(os.path.abspath(__file__))
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
 data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
-# common module
+
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
-
+path = os.path.dirname(os.path.abspath(__file__)) + "/persons.csv"
 # start this manager by a menu
 def start():
     title = "Human resources manager: "
@@ -26,26 +26,25 @@ def start():
                "Remove form table",
                "Update the table",
                "Get the oldest person(s)",
-               "Get the closest persons(s) to average",
-               "Back to the main menu"]
+               "Get the closest persons(s) to average"]
     while True:
         ui.print_menu(title, options, exit_message)
         inputs = ui.get_inputs(["\nPlease enter a number: "], "")
         option = int(inputs[0])
         if option == 1:
-            show_table(data_manager.get_table_from_file("persons.csv"))
+            show_table(data_manager.get_table_from_file(path))
         elif option == 2:
-            add(data_manager.get_table_from_file("persons.csv"))
+            add(data_manager.get_table_from_file(path))
         elif option == 3:
-            remove(data_manager.get_table_from_file("persons.csv"), 'id')
+            remove(data_manager.get_table_from_file(path), 'id')
         elif option == 4:
             update()
         elif option == 5:
             get_oldest_person()
         elif option == 6:
             get_persons_closest_to_average()
-        elif option == 0:
-            break
+        #elif option == 0:
+        #    break
         else:
             raise KeyError("There is no such option.")
         pass
@@ -59,12 +58,12 @@ def show_table(table):
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-    ID = ['gjdnjasn']
+    ID = [common.generate_random(table)]
     name = ui.get_inputs(["Please enter the name: "], "")
     year_of_birth = ui.get_inputs(["Please enter the year of birth: "], "")
     new_item = [ID + name + year_of_birth]
     table += new_item
-    data_manager.write_table_to_file("persons.csv", table)
+    data_manager.write_table_to_file(path, table)
     return table
 
 
@@ -78,7 +77,7 @@ def remove(table, id_):
     for y in range(len(id_table)):
         if correct_rem_id in id_table[y]:
             table.pop(y)
-            data_manager.write_table_to_file("persons.csv", table)
+            data_manager.write_table_to_file(path, table)
     show_table(table)
     return table
 
