@@ -23,16 +23,9 @@ list_titles = ['id',
                'price',
                'in_stock']
 
-<<<<<<< HEAD
-=======
-# start this manager by a menu
-def start_module():
-
-    # you code
->>>>>>> d4fa99bc2420da8c9d5b01f0a6c71900aec33f7b
 
 # start this manager by a menu
-def start_module():
+def start():
     list_options = ['(0) Exit',
                     '(1) Show_table',
                     '(2) Add',
@@ -50,9 +43,9 @@ def start_module():
         if option == 1:
             show_table(data.manager.get_table_from_file('games.csv'))
         elif option == 2:
-            add(table)
+            add(data_manager.get_table_from_file("games.csv"))
         elif option == 3:
-            remove(table, id_)
+            remove(data_manager.get_table_from_file("games.csv"), 'id')
         elif option == 4:
             update(table, id_)
         elif option == 5:
@@ -75,7 +68,7 @@ def show_table(table):
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-
+    ID = common.generate_random(table)
     # your code
 
     return table
