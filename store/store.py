@@ -18,80 +18,89 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 # common module
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
+path = os.path.dirname(os.path.abspath(__file__)) + "/games_test.csv"
 title = 'Store Manager'
-list_titles = ['id',
-               'title',
-               'manufacturer',
-               'price',
-               'in_stock']
-
-# start this manager by a menu
 
 
 
 # start this manager by a menu
 def start():
-    list_options = ['(0) Exit',
-                    '(1) Show_table',
-                    '(2) Add',
-                    '(3) Remove',
-                    '(4) Update',
-                    '(5) Get counts by manufacturer',
-                    '(6) Get avarage by manufacturer'
-                    '(7) Back to main menu']
+    menu = ['Show table',
+            'Add',
+            'Remove',
+            'Update',
+            'Get counts by manufacturer',
+            'Get avarage by manufacturer',
+            'Exit']
     exit_message = 'Back to main menu'
 
     while True:
-        ui.print_menu(title, list_options, exit_message)
-        option = ui.get_inputs(["Please enter a number: "], "")
-        if option == '1':
-            show_table(data.manager.get_table_from_file('games.csv'))
-        elif option == '2':
-            add(data_manager.get_table_from_file("games.csv"))
-        elif option == '3':
-            remove(data_manager.get_table_from_file("games.csv"), 'id')
-        elif option == '4':
-            update(table, id_)
-        elif option == '5':
-            get_counts_by_manufacturers(table)
-        elif option == '6':
-            get_average_by_manufacturer(table, manufacturer)
-        elif option == '0':
-            break
+        ui.print_menu(title, menu, exit_message)
+        table = data_manager.get_table_from_file(path)
+        inputs = ui.get_inputs(["\nPlease enter a number: "], "")
+        option = int(inputs[0])
+        if option == 1:
+            show_table(data_manager.get_table_from_file(path))
+        elif option == 2:
+            data_manager.dite_table_to_file(path, add(table))
+        elif option == 3:
+            id_remove = ui.get_inputs(['Please add ID to remove: '], '')[0]
+            data_manager.write_table_to_file(path, remove(table, id_remove))
+        elif option == 4:
+            id_update = ui.get_inputs(['Please add ID to update: '], '')[0]
+            data_manager.write_table_to_file(path, update(table, id_update))
+        elif option == 5:
+            print(get_counts_by_manufacturers(data_manager.get_table_from_file(path)))
+        elif option == 6:
+            manufacturer = ui.get_inputs(['Please add manufacturer to count: '], '')
+            print(get_average_by_manufacturer(data_manager.get_table_from_file(path), manufacturer))
+        #elif option == '7':
+        #    break
         else:
             raise KeyError("There is no such option.")
 
 
 # print the default table of records from the file
 def show_table(table):
-
-    # your code
-
-    pass
+    list_titles = ['ID',
+                   'Title',
+                   'Manufacturer',
+                   'Price',
+                   'In stock']
+    ui.print_table(table, list_titles)
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-
-    # your code
-
+    list_titles = ['Please add tite: ',
+                   'Please add manufacturer ',
+                   'Please enter price ',
+                   'Enter how many is in stock ']
+    new_item = [common.generate_random(table)] + ui.get_inputs(list_titles, table)
+    table.append(new_item)
     return table
 
 
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-
-    # your code
-
+    for line in table:
+        if line[0] == id_:
+            to_remove = table.index(line)
+            del table[to_remove]
     return table
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-
-    # your code
-
+    update_list = []
+    list_titles = ['Please add tite: ',
+                   'Please add manufacturer ',
+                   'Please enter price ',
+                   'Enter how many is in stock ']
+    for line in table:
+        update_list.append(line[0])
+    table[update_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 
@@ -101,16 +110,22 @@ def update(table, id_):
 # the question: How many different kinds of game are available of each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [count] }
 def get_counts_by_manufacturers(table):
-
-    # your code
-
-    pass
+    my_dict = {}
+    for line in table:
+        if line[2] not in my_dict:
+            my_dict[line[2]] = 1
+        elif line[2] in my_dict:
+            my_dict[line[2]] += 1
+    return my_dict
 
 
 # the question: What is the average amount of games in stock of a given manufacturer?
 # return type: number
 def get_average_by_manufacturer(table, manufacturer):
-
-    # your code
-
-    pass
+    counter = 0
+    in_stock_list = []
+    for line in table:
+        if manufacturer[0] == line[2]:
+            counter += 1
+            in_stock_list.append(int(line[4]))
+    return round(common.list_sum(in_stock_list) // counter)

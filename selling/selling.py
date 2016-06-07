@@ -90,24 +90,22 @@ def add(table):
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
     for line in table:
-        if line[0] == id_:
-            to_remove = table.index(line)
-    del table[to_remove]
+        if id_ in line:
+            table.remove(line)
     return table
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-    id_list =[]
     list_titles = ['title: ',
                    'price: ',
                    'month: ',
                    'day: ',
                    'year: ']
     for line in table:
-        id_list.append(line[0])
-    table[id_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 
@@ -118,17 +116,19 @@ def update(table, id_):
 # return type: string (id)
 # if there are more than one with the lowest price, return the first of descending alphabetical order
 def get_lowest_price_item_id(table):
-    smallest_prices = [table[0]]
+    smallest_prices = [[1, 1, 10000]]
     names = []
     for line in table:
-        if int(line[2]) > int(smallest_prices[0][2]):
-            smallest_prices = line
+        if int(line[2]) < int(smallest_prices[0][2]):
+            smallest_prices = [line]
         if int(line[2]) == int(smallest_prices[0][2]):
             smallest_prices.append(line)
     for line in smallest_prices:
-        names.append(line[0])
+        names.append(line[1])
+    for line in table:
+        if line[1] == max(names):
+            return line[0]
 
-    return(smallest_prices[name.index(max(names))][0])
 
 
 
@@ -140,7 +140,7 @@ def get_items_sold_between(table, month_from, day_from, year_from, month_to, day
     results = []
     for line in table:
         date_today = int(str(line[5]) + str(line[3]) + str(line[4]))
-        if (date_today > date_from) and (date_today < date_to):
+        if (date_today > from_date) and (date_today < to_date):
             results.append(line)
     return results
 

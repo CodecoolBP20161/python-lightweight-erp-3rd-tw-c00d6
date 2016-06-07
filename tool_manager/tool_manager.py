@@ -48,7 +48,7 @@ def start():
             id_num = ui.get_inputs(["Please enter the ID of the element that you would like to update:"], "")
             data_manager.write_table_to_file(path, update(table, id_num[0]))
         elif tool_option == 5:
-            ui.print_table(get_available_tools(table), list_of_column_names)
+            get_available_tools(table)
         elif tool_option == 6:
             names = ["Manufacturer", "Average durability"]
             get_average_durability_by_manufacturers(table)
@@ -98,16 +98,19 @@ def update(table, id_):
 # the question: Which items has not yet exceeded their durability ?
 # return type: list of lists (the inner list contains the whole row with their actual data types)
 def get_available_tools(table):
-    date = ui.get_inputs(["Please enter the current year:"], "")
-    year = int(date[0])
-    available_tools = [element for element in table if (int(element[3]) + int(element[4])) <= year]
+    date = 2016
+    list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
+    available_tools = [element for element in table if (int(element[3]) + int(element[4])) >= date]
+    ui.print_table(available_tools, list_of_column_names)
+    for x in range(len(available_tools)):
+        available_tools[x][3] = int(available_tools[x][3])
+        available_tools[x][4] = int(available_tools[x][4])
     return available_tools
 
 
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 def get_average_durability_by_manufacturers(table):
-    counter_list = {}
     average_durability = {}
     average_durability = {manufacturer[2]: 0 for manufacturer in table if average_durability.get(manufacturer[2]) == None}
     keys = average_durability.keys()
