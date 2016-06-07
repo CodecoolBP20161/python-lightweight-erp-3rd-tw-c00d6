@@ -30,6 +30,7 @@ def start():
     while True:
         ui.print_menu("Tool Manager", menu_options, "Back to Main menu")
         inputs = ui.get_inputs(["Please select an option: "], "")
+        list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
         try:
             tool_option = int(inputs[0])
         except ValueError:
@@ -47,10 +48,10 @@ def start():
             id_num = ui.get_inputs(["Please enter the ID of the element that you would like to update:"], "")
             data_manager.write_table_to_file(path, update(table, id_num[0]))
         elif tool_option == 5:
-            list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
             ui.print_table(get_available_tools(table), list_of_column_names)
         elif tool_option == 6:
-            get_average_durability_by_manufacturers(data_manager.get_table_from_file(path))
+            names = ["Manufacturer", "Average durability"]
+            get_average_durability_by_manufacturers(table)
         elif tool_option == 0:
 
             break
@@ -108,7 +109,14 @@ def get_available_tools(table):
 # the question: What are the average durability time for each manufacturer?
 # return type: a dictionary with this structure: { [manufacturer] : [avg] }
 def get_average_durability_by_manufacturers(table):
-
-    # your code
-
-    pass
+    counter_list = {}
+    average_durability = {}
+    average_durability = {manufacturer[2]: 0 for manufacturer in table if average_durability.get(manufacturer[2]) == None}
+    keys = average_durability.keys()
+    counter_dict = {key: 0 for key in keys}
+    for tool in table:
+        average_durability[str(tool[2])] = average_durability[str(tool[2])] + int(tool[4])
+        counter_dict[str(tool[2])] += 1
+    for key in average_durability.keys():
+        average_durability[key] /= counter_dict[key]
+    return(average_durability)
