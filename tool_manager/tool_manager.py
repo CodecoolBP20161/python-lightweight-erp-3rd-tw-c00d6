@@ -21,41 +21,46 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 # start this manager by a menu
 def start():
-    menu_options = ["Show tool table,",
-                    "Add tool,",
-                    "Remove tool,",
-                    "Update tool,",
-                    "Get available tools,",
-                    "Get average durability by manufacturers,"]
+    menu_options = ["Show tool table",
+                    "Add tool",
+                    "Remove tool",
+                    "Update tool",
+                    "Get available tools",
+                    "Get average durability by manufacturers"]
     while True:
         ui.print_menu("Tool Manager", menu_options, "Back to Main menu")
-        tool_option = ui.get_inputs(["Please select an option: "], "")
-        if tool_option == "1":
-            show_table(data_manager.get_table_from_file("tools.csv"))
-        elif tool_option == "2":
-            data_manager.write_table_to_file(add(data_manager.get_table_from_file("tools.csv")))
-        elif tool_option == "3":
-            data_manager.write_table_to_file(remove(data_manager.get_table_from_file("tools.csv")))
-        elif tool_option == "4":
-            data_manager.write_table_to_file(update(data_manager.get_table_from_file("tools.csv")))
-        elif tool_option == "5":
-            get_available_tools(data_manager.get_table_from_file("tools.csv"))
-        elif tool_option == "6":
-            get_average_durability_by_manufacturers(data_manager.get_table_from_file("tools.csv"))
-        elif tool_option == "0":
+        inputs = ui.get_inputs(["Please select an option: "], "")
+        tool_option = int(inputs[0])
+        path = os.path.dirname(os.path.abspath(__file__)) + "/tools.csv"
+        table = data_manager.get_table_from_file(path)
+        if tool_option == 1:
+            show_table(table)
+        elif tool_option == 2:
+            table = add(table)
+        elif tool_option == 3:
+            data_manager.write_table_to_file(remove(data_manager.get_table_from_file(path)))
+        elif tool_option == 4:
+            data_manager.write_table_to_file(update(data_manager.get_table_from_file(path)))
+        elif tool_option == 5:
+            get_available_tools(data_manager.get_table_from_file(path))
+        elif tool_option == 6:
+            get_average_durability_by_manufacturers(data_manager.get_table_from_file(path))
+        elif tool_option == 0:
             break
 
 
 # print the default table of records from the file
 def show_table(table):
-    ui.print_table(table, ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"])
+    print("3. bejutott")
+    list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
+    ui.print_table(table, list_of_column_names)
     pass
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
     list_of_titles = ["Please enter the person's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
-
+    table.append(ui.get_inputs(list_of_titles, ""))
     return table
 
 
