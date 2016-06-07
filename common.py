@@ -21,3 +21,21 @@ def generate_random(table):
             continue
 
     pass
+
+def sorting(table, index):
+    all_items = []
+    sorted_list = [table[1][index]]
+    for line in table:
+        all_items.append(line[index])
+    for item in all_items:
+        for to_relate in sorted_list:
+            if item < to_relate:
+                sorted_list.insert(sorted_list.index(to_relate), item)
+                break
+    print (sorted_list)
+
+    def list_sum(list):
+        summa = 0
+        for item in list:
+            summa += item
+        return summa
