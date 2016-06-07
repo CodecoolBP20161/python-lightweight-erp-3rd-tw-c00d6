@@ -28,10 +28,9 @@ def start():
                     'Remove',
                     'Update',
                     'highest profit?',
-                    'average (per item) profit'
-                    'Back to main menu']
+                    'average (per item) profit',]
     exit_message = 'Back to main menu'
-    title = "accounting"
+    title = "Accounting"
     while True:
         ui.print_menu(title, list_options, exit_message)
         inputs = ui.get_inputs(["Please enter a number: "], "")
@@ -47,7 +46,9 @@ def start():
         elif option == '5':
             which_year_max(data_manager.get_table_from_file(path))
         elif option == '6':
-            avg_amount(table, year)
+            year = ui.get_inputs(["Please enter a year: "], "")
+
+            avg_amount(data_manager.get_table_from_file(path), year)
         elif option == '0':
             break
         else:
@@ -129,7 +130,19 @@ def which_year_max(table):
 # the question: What is the average (per item) profit in a given year? [(profit)/(items count) ]
 # return the answer (number)
 def avg_amount(table, year):
-
-    # your code
+    profit = 0
+    items_count = 0
+    for line in table:
+        print(year, line[3])
+        if str(line[3]) == str(year[0]):
+            if str(line[4]) == str("in"):
+                profit += int(line[5])
+                items_count += (1)
+            elif str(line[4]) == str("out"):
+                profit -= int(line[5])
+                items_count += (1)
+    avg_profit = profit / items_count
+    print(avg_profit)
+    return(avg_profit)
 
     pass
