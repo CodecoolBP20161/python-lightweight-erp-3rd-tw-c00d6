@@ -42,7 +42,7 @@ def start():
             id_ = ui.get_inputs(["Please enter the ID, that you want to update: "], "")
             update(data_manager.get_table_from_file(path), id_)
         elif option == 5:
-            get_oldest_person()
+            get_oldest_person(data_manager.get_table_from_file(path))
         elif option == 6:
             get_persons_closest_to_average()
         else:
@@ -102,7 +102,7 @@ def update(table, id_):
             # write to file the new table(update updating id line)
             data_manager.write_table_to_file(path, table)
     show_table(table)
-    
+
     return table
 
 
@@ -112,8 +112,15 @@ def update(table, id_):
 # the question: Who is the oldest person ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
-
-    pass
+    years_list = []
+    oldest_persons = []
+    for year in range(len(table)):
+        years_list.append(table[year][2])
+    years_list = (sorted(years_list)[0])
+    for y in range(len(table)):
+        if years_list in table[y][2]:
+            oldest_persons.append(table[y][1])
+    return(oldest_persons)
 
 
 # the question: Who is the closest to the average age ?
