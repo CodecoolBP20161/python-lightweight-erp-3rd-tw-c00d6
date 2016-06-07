@@ -46,8 +46,8 @@ def start():
         elif option == '5':
             which_year_max(data_manager.get_table_from_file(path))
         elif option == '6':
-            year = ui.get_inputs(["Please enter a year: "], "")
-
+            year_input = ui.get_inputs(["Please enter a year: "], "")
+            year = year_input[0]
             avg_amount(data_manager.get_table_from_file(path), year)
         elif option == '0':
             break
@@ -71,7 +71,9 @@ def show_table(table):
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-
+    list_titles = ["id", "month", "day", "year", "type", "amount"]
+    new_item = [common.generate_random(table)] + ui.get_inputs(list_titles, table)
+    table.append(new_item)
     # your code
 
     return table
@@ -79,7 +81,11 @@ def add(table):
 
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-
+    for line in table:
+        if line[0] == id_:
+            to_remove = table.index(line)
+    del table[to_remove]
+    return table
     # your code
 
     return table
@@ -88,7 +94,12 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return the @table
 def update(table, id_):
-
+    id_list =[]
+    list_titles = ["id", "month", "day", "year", "type", "amount"]
+    for line in table:
+        id_list.append(line[0])
+    table[id_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
+    return table
     # your code
 
     return table
@@ -133,16 +144,14 @@ def avg_amount(table, year):
     profit = 0
     items_count = 0
     for line in table:
-        print(year, line[3])
-        if str(line[3]) == str(year[0]):
+        if str(line[3]) == str(year):
             if str(line[4]) == str("in"):
                 profit += int(line[5])
                 items_count += (1)
             elif str(line[4]) == str("out"):
                 profit -= int(line[5])
                 items_count += (1)
-    avg_profit = profit / items_count
+    print(profit, items_count)
+    avg_profit = (profit / items_count)
     print(avg_profit)
     return(avg_profit)
-
-    pass
