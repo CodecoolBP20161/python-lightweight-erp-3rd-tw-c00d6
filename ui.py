@@ -11,10 +11,19 @@
 # table: the list of results, title_list: the title of data, eg: id,
 # title, ect.
 def print_table(table, title_list):
-    print (title_list)
-    print ('')  # i will design it later, be patient ;)
+    item_length = []
     for line in table:
-        print (line)
+        for item in line:
+            item_length.append(len(item))
+    column = max(item_length) + 3
+    print ('\n')
+    for item in title_list:
+        print(item, end=((' '*(column-len(item))) + '|  '))
+    print ('\n' + ('=' * (3*column + 7)))
+    for line in table:
+        for item in line:
+            print(item, end=((' '*(column-len(item))) + '|  '))
+        print ("\n" + ('-' * column) + '+' + ('-' * (column+2)) + '+' + ('-' * (column+2)) + '+' )
 
     pass
 
