@@ -53,9 +53,7 @@ def start():
             names = ["Manufacturer", "Average durability"]
             get_average_durability_by_manufacturers(table)
         elif tool_option == 0:
-
             break
-
 
 # print the default table of records from the file
 def show_table(table):
