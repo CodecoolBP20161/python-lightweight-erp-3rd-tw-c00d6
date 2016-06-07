@@ -22,7 +22,38 @@ common = SourceFileLoader("common", current_file_path + "/../common.py").load_mo
 
 # start this manager by a menu
 def start():
+    list_options = [
+                    'Show_table',
+                    'Add',
+                    'Remove',
+                    'Update',
+                    'highest profit?',
+                    'average (per item) profit'
+                    'Back to main menu']
+    exit_message = 'Back to main menu'
+    title = "accounting"
+    while True:
+        ui.print_menu(title, list_options, exit_message)
+        option = ui.get_inputs(["Please enter a number: "], "")
+        if option == '1':
+            show_table(data.manager.get_table_from_file('items.csv'))
+        elif option == '2':
+            add(data_manager.get_table_from_file("items.csv"))
+        elif option == '3':
+            remove(data_manager.get_table_from_file("items.csv"), 'id')
+        elif option == '4':
+            update(table, id_)
+        elif option == '5':
+            which_year_max(table)
+        elif option == '6':
+            avg_amount(table, year)
+        elif option == '0':
+            break
+        else:
+            raise KeyError("There is no such option.")
 
+
+    pass
     # you code
 
     pass

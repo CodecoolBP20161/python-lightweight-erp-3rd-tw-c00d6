@@ -38,7 +38,7 @@ def start():
         elif option == 3:
             remove(data_manager.get_table_from_file(path), 'id')
         elif option == 4:
-            update()
+            update(data_manager.get_table_from_file(path), 'id')
         elif option == 5:
             get_oldest_person()
         elif option == 6:
@@ -73,10 +73,13 @@ def remove(table, id_):
     correct_rem_id = removing_id[0]
     id_table = []
     for lines in table:
+        # create a list to id-s
         id_table.append(lines[0])
     for y in range(len(id_table)):
         if correct_rem_id in id_table[y]:
+            # remove ID's line
             table.pop(y)
+            # write to file the new table(without removed id line)
             data_manager.write_table_to_file(path, table)
     show_table(table)
     return table
@@ -85,8 +88,22 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-
-    # your code
+    updating_id = ui.get_inputs(["Please enter the ID, that you want to update: "], "")
+    correct_upd_id = updating_id[0]
+    id_table = []
+    for lines in table:
+        # create a list to id-s
+        id_table.append(lines[0])
+    for y in range(len(id_table)):
+        if correct_upd_id in id_table[y]:
+            name = ui.get_inputs(["Please enter the name: "], "")
+            year_of_birth = ui.get_inputs(["Please enter the year of birth: "], "")
+            # create a list with the updated info
+            update_item = [correct_upd_id, name[0], year_of_birth[0]]
+            table[y] = update_item
+            # write to file the new table(update updating id line)
+            data_manager.write_table_to_file(path, table)
+    show_table(table)
 
     return table
 
