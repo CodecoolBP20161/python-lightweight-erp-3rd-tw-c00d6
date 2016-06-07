@@ -25,7 +25,6 @@ title = "selling manager"
 
 # start this manager by a menu
 def start():
-    print ('inside')
     list_options = ['Show_table',
                     'Add',
                     'Remove',
@@ -65,7 +64,6 @@ def start():
 
 # print the default table of records from the file
 def show_table(table):
-    print ('I am in')
     list_titles = ['id',
                    'title',
                    'price',
@@ -120,16 +118,31 @@ def update(table, id_):
 # return type: string (id)
 # if there are more than one with the lowest price, return the first of descending alphabetical order
 def get_lowest_price_item_id(table):
-    prices = []
+    smallest_prices = [table[0]]
+    names = []
     for line in table:
-        prices.append(line[2])
-    return (table[prices.index(min(prices))][0])
+        if int(line[2]) > int(smallest_prices[0][2]):
+            smallest_prices = line
+        if int(line[2]) == int(smallest_prices[0][2]):
+            smallest_prices.append(line)
+    for line in smallest_prices:
+        names.append(line[0])
+
+    return(smallest_prices[name.index(max(names))][0])
 
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
 def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+    from_date = int(str(year_from) + str(month_from) + str(day_from))
+    to_date = int(str(year_from) + str(month_from) + str(day_from))
+    results = []
+    for line in table:
+        date_today = int(str(line[5]) + str(line[3]) + str(line[4]))
+        if (date_today > date_from) and (date_today < date_to):
+            results.append(line)
+    return results
 
     # your code
 
