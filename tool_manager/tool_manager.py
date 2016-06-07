@@ -30,7 +30,10 @@ def start():
     while True:
         ui.print_menu("Tool Manager", menu_options, "Back to Main menu")
         inputs = ui.get_inputs(["Please select an option: "], "")
-        tool_option = int(inputs[0])
+        try:
+            tool_option = int(inputs[0])
+        except ValueError:
+            continue
         path = os.path.dirname(os.path.abspath(__file__)) + "/tools.csv"
         table = data_manager.get_table_from_file(path)
         if tool_option == 1:
@@ -38,7 +41,8 @@ def start():
         elif tool_option == 2:
             data_manager.write_table_to_file(path, add(table))
         elif tool_option == 3:
-            data_manager.write_table_to_file(remove(data_manager.get_table_from_file(path)))
+            ID = ui.get_inputs(["Please enter the ID of the element that you would like to remove:"], "")
+            data_manager.write_table_to_file(path, remove(table, ID[0]))
         elif tool_option == 4:
             data_manager.write_table_to_file(update(data_manager.get_table_from_file(path)))
         elif tool_option == 5:
@@ -51,7 +55,6 @@ def start():
 
 # print the default table of records from the file
 def show_table(table):
-    print("3. bejutott")
     list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
     ui.print_table(table, list_of_column_names)
     pass
@@ -59,7 +62,7 @@ def show_table(table):
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-    list_of_titles = ["Please enter the person's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
+    list_of_titles = ["Please enter the tool's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
     ID = (common.generate_random(table))
     new_element = [ID] + ui.get_inputs(list_of_titles, "")
     table.append(new_element)
@@ -68,9 +71,9 @@ def add(table):
 
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-
-    # your code
-
+    for i in range(len(table)):
+        if str(id_) == str(table[i][0]):
+            table.pop(i)
     return table
 
 
