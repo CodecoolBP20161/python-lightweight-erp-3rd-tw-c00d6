@@ -22,7 +22,7 @@ def generate_random(table):
 
     pass
 
-'''def sorting(table, index, index_of_result):
+def sorting(table, index, index_of_result):
     all_items = []
     sorted_list = [table[1][index]]
     for line in table:
@@ -32,7 +32,7 @@ def generate_random(table):
             if item < to_relate:
                 sorted_list.insert(sorted_list.index(to_relate), item)
                 break
-    print (sorted_list)'''
+    print (sorted_list)
 
     def list_sum(list):
         summa = 0
