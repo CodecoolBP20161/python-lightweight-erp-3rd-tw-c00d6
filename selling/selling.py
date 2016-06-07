@@ -48,7 +48,8 @@ def start():
             id = ui.get_inputs(['Enter the ID: '], '')[0]
             data_manager.write_table_to_file(path, remove(table, id))
         elif option == '4':
-            update(table, id_)
+            id = ui.get_inputs(['Enter the ID: '], '')[0]
+            data_manager.write_table_to_file(path, update(table, id))
         elif option == '5':
             get_lowest_price_item_id(table)
         elif option == '6':
@@ -100,9 +101,15 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-
-    # your code
-
+    id_list =[]
+    list_titles = ['title: ',
+                   'price: ',
+                   'month: ',
+                   'day: ',
+                   'year: ']
+    for line in table:
+        id_list.append(line[0])
+    table[id_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 
@@ -113,10 +120,11 @@ def update(table, id_):
 # return type: string (id)
 # if there are more than one with the lowest price, return the first of descending alphabetical order
 def get_lowest_price_item_id(table):
+    prices = []
+    for line in table:
+        prices.append(line[2])
+    return (table[prices.index(min(prices))][0])
 
-    # your code
-
-    pass
 
 
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
