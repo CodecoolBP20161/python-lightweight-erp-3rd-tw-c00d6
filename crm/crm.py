@@ -84,9 +84,8 @@ def add(table):
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
     for line in table:
-        if line[0] == id_:
-            to_remove = table.index(line)
-    del table[to_remove]
+        if id_ in line:
+            table.remove(line)
     return table
 
 
@@ -99,8 +98,8 @@ def update(table, id_):
                    'e-mail',
                    'subscribed']
     for line in table:
-        id_list.append(line[0])
-    table[id_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 # special functions:
