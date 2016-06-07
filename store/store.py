@@ -25,7 +25,7 @@ list_titles = ['id',
 
 
 # start this manager by a menu
-def start1():
+def start():
     list_options = ['(0) Exit',
                     '(1) Show_table',
                     '(2) Add',
