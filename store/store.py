@@ -23,13 +23,10 @@ list_titles = ['id',
                'price',
                'in_stock']
 
-<<<<<<< HEAD
-=======
 # start this manager by a menu
-def start_module():
+#def start_module():
 
     # you code
->>>>>>> d4fa99bc2420da8c9d5b01f0a6c71900aec33f7b
 
 # start this manager by a menu
 def start_module():
