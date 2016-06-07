@@ -41,15 +41,17 @@ def start():
         elif tool_option == 2:
             data_manager.write_table_to_file(path, add(table))
         elif tool_option == 3:
-            ID = ui.get_inputs(["Please enter the ID of the element that you would like to remove:"], "")
-            data_manager.write_table_to_file(path, remove(table, ID[0]))
+            id_num = ui.get_inputs(["Please enter the ID of the element that you would like to remove:"], "")
+            data_manager.write_table_to_file(path, remove(table, id_num[0]))
         elif tool_option == 4:
-            data_manager.write_table_to_file(update(data_manager.get_table_from_file(path)))
+            id_num = ui.get_inputs(["Please enter the ID of the element that you would like to update:"], "")
+            data_manager.write_table_to_file(path, update(table, id_num[0]))
         elif tool_option == 5:
             get_available_tools(data_manager.get_table_from_file(path))
         elif tool_option == 6:
             get_average_durability_by_manufacturers(data_manager.get_table_from_file(path))
         elif tool_option == 0:
+
             break
 
 
@@ -74,6 +76,7 @@ def remove(table, id_):
     for i in range(len(table)):
         if str(id_) == str(table[i][0]):
             table.pop(i)
+            break
     return table
 
 
@@ -81,8 +84,11 @@ def remove(table, id_):
 # than return @table
 def update(table, id_):
 
-    # your code
-
+    list_of_titles = ["Please enter the tool's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
+    for i in range(len(table)):
+        if str(id_) == str(table[i][0]):
+            updated_element = ui.get_inputs(list_of_titles, "")
+            table[i] = [id_] + updated_element
     return table
 
 
