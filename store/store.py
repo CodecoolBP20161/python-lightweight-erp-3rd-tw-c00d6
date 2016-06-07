@@ -12,9 +12,11 @@ import os
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
-ui = SourceFileLoader("module.name", current_file_path + "/../ui.py").load_module()
+ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("module.name", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+# common module
+common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
 title = 'Store Manager'
 list_titles = ['id',
@@ -28,7 +30,7 @@ list_titles = ['id',
 
 
 # start this manager by a menu
-def start_module():
+def start():
     list_options = ['(0) Exit',
                     '(1) Show_table',
                     '(2) Add',
