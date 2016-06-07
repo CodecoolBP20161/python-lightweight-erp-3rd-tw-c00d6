@@ -36,7 +36,7 @@ def start():
         if tool_option == 1:
             show_table(table)
         elif tool_option == 2:
-            table = add(table)
+            data_manager.write_table_to_file(path, add(table))
         elif tool_option == 3:
             data_manager.write_table_to_file(remove(data_manager.get_table_from_file(path)))
         elif tool_option == 4:
@@ -60,7 +60,9 @@ def show_table(table):
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
     list_of_titles = ["Please enter the person's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
-    table.append(ui.get_inputs(list_of_titles, ""))
+    ID = (common.generate_random(table))
+    new_element = [ID] + ui.get_inputs(list_of_titles, "")
+    table.append(new_element)
     return table
 
 
