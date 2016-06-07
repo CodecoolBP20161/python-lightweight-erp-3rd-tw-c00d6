@@ -23,9 +23,12 @@ list_titles = ['id',
                'price',
                'in_stock']
 
+# start this manager by a menu
+
+
 
 # start this manager by a menu
-def start():
+def start_module():
     list_options = ['(0) Exit',
                     '(1) Show_table',
                     '(2) Add',
@@ -67,7 +70,7 @@ def show_table(table):
 
 # Ask a new record as an input from the user than add it to @table, than return @table
 def add(table):
-    ID = common.generate_random(table)
+
     # your code
 
     return table
