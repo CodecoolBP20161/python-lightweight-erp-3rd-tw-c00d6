@@ -36,15 +36,15 @@ def start():
         elif option == 2:
             add(data_manager.get_table_from_file(path))
         elif option == 3:
-            remove(data_manager.get_table_from_file(path), 'id')
+            id_ = ui.get_inputs(["Please enter the ID, that you want to remove: "], "")
+            remove(data_manager.get_table_from_file(path), id_)
         elif option == 4:
-            update()
+            id_ = ui.get_inputs(["Please enter the ID, that you want to update: "], "")
+            update(data_manager.get_table_from_file(path), id_)
         elif option == 5:
             get_oldest_person()
         elif option == 6:
             get_persons_closest_to_average()
-        #elif option == 0:
-        #    break
         else:
             raise KeyError("There is no such option.")
         pass
@@ -69,14 +69,16 @@ def add(table):
 
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
-    removing_id = ui.get_inputs(["Please enter the ID, that you want to remove: "], "")
-    correct_rem_id = removing_id[0]
+    correct_rem_id = id_[0]
     id_table = []
     for lines in table:
+        # create a list to id-s
         id_table.append(lines[0])
     for y in range(len(id_table)):
         if correct_rem_id in id_table[y]:
+            # remove ID's line
             table.pop(y)
+            # write to file the new table(without removed id line)
             data_manager.write_table_to_file(path, table)
     show_table(table)
     return table
@@ -85,9 +87,22 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-
-    # your code
-
+    correct_upd_id = id_[0]
+    id_table = []
+    for lines in table:
+        # create a list to id-s
+        id_table.append(lines[0])
+    for y in range(len(id_table)):
+        if correct_upd_id in id_table[y]:
+            name = ui.get_inputs(["Please enter the name: "], "")
+            year_of_birth = ui.get_inputs(["Please enter the year of birth: "], "")
+            # create a list with the updated info
+            update_item = [correct_upd_id, name[0], year_of_birth[0]]
+            table[y] = update_item
+            # write to file the new table(update updating id line)
+            data_manager.write_table_to_file(path, table)
+    show_table(table)
+    
     return table
 
 
@@ -97,8 +112,6 @@ def update(table, id_):
 # the question: Who is the oldest person ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_oldest_person(table):
-
-    # your code
 
     pass
 
