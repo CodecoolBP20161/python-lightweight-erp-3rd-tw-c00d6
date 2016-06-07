@@ -25,7 +25,7 @@ list_titles = ['id',
 
 
 # start this manager by a menu
-def start():
+def start1():
     list_options = ['(0) Exit',
                     '(1) Show_table',
                     '(2) Add',
@@ -38,21 +38,20 @@ def start():
 
     while True:
         ui.print_menu(title, list_options, exit_message)
-        inputs = ui.get_inputs(["Please enter a number: "], "")
-        option = int(inputs[0])
-        if option == 1:
+        option = ui.get_inputs(["Please enter a number: "], "")
+        if option == '1':
             show_table(data.manager.get_table_from_file('games.csv'))
-        elif option == 2:
+        elif option == '2':
             add(data_manager.get_table_from_file("games.csv"))
-        elif option == 3:
+        elif option == '3':
             remove(data_manager.get_table_from_file("games.csv"), 'id')
-        elif option == 4:
+        elif option == '4':
             update(table, id_)
-        elif option == 5:
+        elif option == '5':
             get_counts_by_manufacturers(table)
-        elif option == 6:
+        elif option == '6':
             get_average_by_manufacturer(table, manufacturer)
-        elif option == 0:
+        elif option == '0':
             break
         else:
             raise KeyError("There is no such option.")

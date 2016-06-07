@@ -20,7 +20,7 @@ common = SourceFileLoader("module.name", current_file_path + "/../common.py").lo
 
 
 # start this manager by a menu
-def start_module():
+def start3():
     menu_options = ["Show tool table,",
                     "Add tool,",
                     "Remove tool,",

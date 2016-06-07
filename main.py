@@ -23,17 +23,17 @@ def choose():
     inputs = ui.get_inputs(["Please enter a number: "], "")
     option = int(inputs[0])
     if option == 1:
-        store.start_module()
+        store.start1()
     elif option == 2:
-        hr.start_module()
+        hr.start2()
     elif option == 3:
-        tool_manager.start_module()
+        tool_manager.start3()
     elif option == 4:
-        accounting.start_module()
+        accounting.start4()
     elif option == 5:
-        selling.start_module()
+        selling.start5()
     elif option == 6:
-        crm.start_module()
+        crm.start6()
     elif option == 0:
         sys.exit(0)
     else:

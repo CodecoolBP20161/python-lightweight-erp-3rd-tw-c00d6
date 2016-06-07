@@ -17,7 +17,7 @@ data_manager = SourceFileLoader("module.name", current_file_path + "/../data_man
 
 
 # start this manager by a menu
-def start_module():
+def start6():
 
     # you code
 
