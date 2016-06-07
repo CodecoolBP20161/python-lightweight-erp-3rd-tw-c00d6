@@ -18,7 +18,7 @@ ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
 # common module
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
-
+path = os.path.dirname(os.path.abspath(__file__)) + "/items.csv"
 
 # start this manager by a menu
 def start():
@@ -34,17 +34,18 @@ def start():
     title = "accounting"
     while True:
         ui.print_menu(title, list_options, exit_message)
-        option = ui.get_inputs(["Please enter a number: "], "")
+        inputs = ui.get_inputs(["Please enter a number: "], "")
+        option = str(inputs[0])
         if option == '1':
-            show_table(data.manager.get_table_from_file('items.csv'))
+            show_table(data_manager.get_table_from_file(path))
         elif option == '2':
-            add(data_manager.get_table_from_file("items.csv"))
+            add(data_manager.get_table_from_file(path))
         elif option == '3':
-            remove(data_manager.get_table_from_file("items.csv"), 'id')
+            remove(data_manager.get_table_from_file(path), 'id')
         elif option == '4':
             update(table, id_)
         elif option == '5':
-            which_year_max(table)
+            which_year_max(data_manager.get_table_from_file(path))
         elif option == '6':
             avg_amount(table, year)
         elif option == '0':
@@ -61,7 +62,7 @@ def start():
 
 # print the default table of records from the file
 def show_table(table):
-
+    ui.print_table(table, ["id", "month", "day", "year", "type", "amount"])
     # your code
 
     pass
@@ -98,6 +99,27 @@ def update(table, id_):
 # the question: Which year has the highest profit? (profit=in-out) (2015 or 2016)
 # return the answer (number)
 def which_year_max(table):
+    #data_manager.get_table_from_file("items.csv")
+    profit_2015 = 0
+    profit_2016 = 0
+    for line in table:
+        if line[3] == 2016:
+            if line[4] == str("in"):
+                profit_2016 += line[5]
+            elif line[4] == str("out"):
+                profit_2016 -= line[5]
+        if line[3] == 2015:
+            if line[4] == str("in"):
+                profit_2015 += line[5]
+            elif line[4] == str("out"):
+                profit_2015 -= line[5]
+        if profit_2015 > profit_2016:
+            return(2015)
+        else:
+            return(2016)
+
+
+
 
     # your code
 
