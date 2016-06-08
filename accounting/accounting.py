@@ -55,18 +55,11 @@ def start():
             raise KeyError("There is no such option.")
 
 
-    pass
-    # you code
-
-    pass
-
 
 # print the default table of records from the file
 def show_table(table):
     ui.print_table(table, ["id", "month", "day", "year", "type", "amount"])
     # your code
-
-    pass
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -75,7 +68,6 @@ def add(table):
     new_item = [common.generate_random(table)] + ui.get_inputs(list_titles, table)
     table.append(new_item)
     # your code
-
     return table
 
 
@@ -86,8 +78,6 @@ def remove(table, id_):
             table.remove(line)
     return table
     # your code
-
-    return table
 
 
 # Update the record in @table having the id @id_ by asking the new data from the user,
@@ -100,9 +90,6 @@ def update(table, id_):
             line = [id_] + ui.get_inputs(list_titles, table)
     return table
     # your code
-
-    return table
-
 
 # special functions:
 # ------------------
@@ -127,14 +114,6 @@ def which_year_max(table):
     for key, val in yearly_profit.items():
         if val == max_profit:
             return int(key)
-
-
-
-
-
-
-
-    # your code
 
     pass
 
