@@ -60,13 +60,12 @@ def start():
 
 # print the default table of records from the file
 def show_table(table):
-    print ('I am in')
+    print('I am in')
     list_titles = ['id',
                    'name',
                    'e-mail',
                    'subscribed']
     ui.print_table(table, list_titles)
-
 
 
 # Ask a new record as an input from the user than add it to @table, than return @table
@@ -92,7 +91,7 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-    id_list =[]
+    id_list = []
     list_titles = ['id',
                    'name',
                    'e-mail',

@@ -55,6 +55,7 @@ def start():
         elif tool_option == 0:
             break
 
+
 # print the default table of records from the file
 def show_table(table):
     list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
@@ -83,7 +84,6 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return @table
 def update(table, id_):
-
     list_of_titles = ["Please enter the tool's name: ", "Please enter the manufacturer's name:", "Please enter the purchase date:", "Please enter the durability of the product:"]
     for i in range(len(table)):
         if str(id_) == str(table[i][0]):

@@ -20,6 +20,7 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 path = os.path.dirname(os.path.abspath(__file__)) + "/items.csv"
 
+
 # start this manager by a menu
 def start():
     list_options = [
@@ -28,7 +29,7 @@ def start():
                     'Remove',
                     'Update',
                     'highest profit?',
-                    'average (per item) profit',]
+                    'average (per item) profit']
     exit_message = 'Back to main menu'
     title = "Accounting"
     while True:
@@ -53,7 +54,6 @@ def start():
             break
         else:
             raise KeyError("There is no such option.")
-
 
 
 # print the default table of records from the file
@@ -83,7 +83,7 @@ def remove(table, id_):
 # Update the record in @table having the id @id_ by asking the new data from the user,
 # than return the @table
 def update(table, id_):
-    id_list =[]
+    id_list = []
     list_titles = ["id", "month", "day", "year", "type", "amount"]
     for line in table:
         if id_ in line:
@@ -94,10 +94,11 @@ def update(table, id_):
 # special functions:
 # ------------------
 
+
 # the question: Which year has the highest profit? (profit=in-out) (2015 or 2016)
 # return the answer (number)
 def which_year_max(table):
-    #data_manager.get_table_from_file("items.csv")
+    # data_manager.get_table_from_file("items.csv")
     yearly_profit = {}
     for i in table:
         if i[4] == 'in':

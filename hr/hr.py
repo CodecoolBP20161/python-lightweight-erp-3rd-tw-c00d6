@@ -17,6 +17,8 @@ data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_ma
 common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
 
 path = os.path.dirname(os.path.abspath(__file__)) + "/persons.csv"
+
+
 # start this manager by a menu
 def start():
     title = "Human resources manager: "
