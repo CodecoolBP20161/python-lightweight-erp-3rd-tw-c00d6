@@ -2,7 +2,7 @@
 # id: string
 #     Unique and random generated (at least 2 special char()expect: ';'), 2 number, 2 lower and 2 upper case letter)
 # name: string
-# birth_date: number (year)
+# birth_date: number (year))
 
 
 # importing everything you need
@@ -44,7 +44,7 @@ def start():
         elif option == 5:
             get_oldest_person(data_manager.get_table_from_file(path))
         elif option == 6:
-            get_persons_closest_to_average()
+            get_persons_closest_to_average(data_manager.get_table_from_file(path))
         else:
             raise KeyError("There is no such option.")
         pass
@@ -114,19 +114,38 @@ def update(table, id_):
 def get_oldest_person(table):
     years_list = []
     oldest_persons = []
-    for year in range(len(table)):
-        years_list.append(table[year][2])
-    years_list = (sorted(years_list)[0])
-    for y in range(len(table)):
-        if years_list in table[y][2]:
-            oldest_persons.append(table[y][1])
+    for line in table:
+        years_list.append(int(line[2]))
+    for line in table:
+        if int(line[2]) == min(years_list):
+            oldest_persons.append(line[1])
     return(oldest_persons)
 
 
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
+    ages =[]
+    closest_ages = [[0, 0, 10000]]
+    results = []
+    for line in table:
+        ages.append(int(line[2]))
+    avg_age = common.list_summa(ages) / len(ages)
+    print (avg_age)
+    for line in table:
+        difference = int(line[2])-avg_age
+        if difference < 0:
+            difference = difference*(-1)
+        closest_dif = int(closest_ages[0][2])-avg_age
+        if closest_dif < 0:
+            closest_dif = closest_dif*(-1)
+        if difference < closest_dif:
+            closest_ages = [line]
+        elif difference == closest_dif:
+            closest_ages.append(line)
+    for line in closest_ages:
+        results.append(line[1])
+    return results
 
-    # your code
 
     pass
