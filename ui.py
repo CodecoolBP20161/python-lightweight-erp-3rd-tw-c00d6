@@ -30,7 +30,6 @@ def print_table(table, title_list):
     else:
         half_column = int((max(item_length) + 3)/2)
     print ('\n')
-    print ('column: %i' % half_column)
     for item in title_list:
         print_to_center(item, half_column)
     print ('\n' + ('=' * (num_of_titles*(half_column*2 + 1))))
@@ -58,8 +57,10 @@ def print_table(table, title_list):
 # eg: back to main menu
 def print_menu(title, list_options, exit_message):
     print ('%s \n \n' % title)
+    num = 1
     for option in list_options:
-        print ('(%i) %s' % ((list_options.index(option) + 1), option))
+        print ('(%i) %s' % (num, option))
+        num += 1
     print ('(0) %s' % exit_message)
     # your code
 
