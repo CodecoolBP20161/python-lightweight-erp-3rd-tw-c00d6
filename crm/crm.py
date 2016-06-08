@@ -60,7 +60,6 @@ def start():
 
 # print the default table of records from the file
 def show_table(table):
-    print('I am in')
     list_titles = ['id',
                    'name',
                    'e-mail',
