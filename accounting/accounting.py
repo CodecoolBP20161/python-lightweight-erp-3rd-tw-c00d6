@@ -82,9 +82,8 @@ def add(table):
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
     for line in table:
-        if line[0] == id_:
-            to_remove = table.index(line)
-    del table[to_remove]
+        if id_ in line:
+            table.remove(line)
     return table
     # your code
 
@@ -97,8 +96,8 @@ def update(table, id_):
     id_list =[]
     list_titles = ["id", "month", "day", "year", "type", "amount"]
     for line in table:
-        id_list.append(line[0])
-    table[id_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_titles, table)
     return table
     # your code
 
@@ -115,20 +114,20 @@ def which_year_max(table):
     profit_2015 = 0
     profit_2016 = 0
     for line in table:
-        if line[3] == 2016:
+        if line[3] == '2016':
             if line[4] == str("in"):
-                profit_2016 += line[5]
+                profit_2016 += int(line[5])
             elif line[4] == str("out"):
-                profit_2016 -= line[5]
-        if line[3] == 2015:
+                profit_2016 -= int(line[5])
+        if line[3] == '2015':
             if line[4] == str("in"):
-                profit_2015 += line[5]
+                profit_2015 += int(line[5])
             elif line[4] == str("out"):
-                profit_2015 -= line[5]
-        if profit_2015 > profit_2016:
-            return(2015)
-        else:
-            return(2016)
+                profit_2015 -= int(line[5])
+    if profit_2015 > profit_2016:
+        return(2015)
+    else:
+        return(2016)
 
 
 
@@ -151,7 +150,5 @@ def avg_amount(table, year):
             elif str(line[4]) == str("out"):
                 profit -= int(line[5])
                 items_count += (1)
-    print(profit, items_count)
     avg_profit = (profit / items_count)
-    print(avg_profit)
-    return(avg_profit)
+    return avg_profit
