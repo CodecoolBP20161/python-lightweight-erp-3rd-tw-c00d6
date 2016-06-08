@@ -111,23 +111,25 @@ def update(table, id_):
 # return the answer (number)
 def which_year_max(table):
     #data_manager.get_table_from_file("items.csv")
-    profit_2015 = 0
-    profit_2016 = 0
-    for line in table:
-        if line[3] == '2016':
-            if line[4] == str("in"):
-                profit_2016 += int(line[5])
-            elif line[4] == str("out"):
-                profit_2016 -= int(line[5])
-        if line[3] == '2015':
-            if line[4] == str("in"):
-                profit_2015 += int(line[5])
-            elif line[4] == str("out"):
-                profit_2015 -= int(line[5])
-    if profit_2015 > profit_2016:
-        return(2015)
-    else:
-        return(2016)
+    yearly_profit = {}
+    for i in table:
+        if i[4] == 'in':
+            if i[3] not in yearly_profit.keys():
+                yearly_profit.update({i[3]: float(i[5])})
+            else:
+                yearly_profit[i[3]] += float(i[5])
+        elif i[4] == 'out':
+            if i[3] not in yearly_profit.keys():
+                yearly_profit.update({i[3]: (float(i[5]) * -1)})
+            else:
+                yearly_profit[i[3]] -= float(i[5])
+    max_profit = max(yearly_profit.values())
+    for key, val in yearly_profit.items():
+        if val == max_profit:
+            return int(key)
+
+
+
 
 
 
