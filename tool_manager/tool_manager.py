@@ -101,7 +101,6 @@ def get_available_tools(table):
     date = 2016
     list_of_column_names = ["Id.", "Name", "Manufacturer", "Purchase date(year)", "Durability(years)"]
     available_tools = [element for element in table if (int(element[3]) + int(element[4])) >= date]
-    ui.print_table(available_tools, list_of_column_names)
     for x in range(len(available_tools)):
         available_tools[x][3] = int(available_tools[x][3])
         available_tools[x][4] = int(available_tools[x][4])
