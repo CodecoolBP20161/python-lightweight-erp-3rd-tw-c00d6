@@ -22,7 +22,6 @@ path = os.path.dirname(os.path.abspath(__file__)) + "/games_test.csv"
 title = 'Store Manager'
 
 
-
 # start this manager by a menu
 def start():
     menu = ['Show table',
@@ -50,10 +49,10 @@ def start():
             id_update = ui.get_inputs(['Please add ID to update: '], '')[0]
             data_manager.write_table_to_file(path, update(table, id_update))
         elif option == 5:
-            print(get_counts_by_manufacturers(data_manager.get_table_from_file(path)))
+            (get_counts_by_manufacturers(data_manager.get_table_from_file(path)))
         elif option == 6:
-            manufacturer = ui.get_inputs(['Please add manufacturer to count: '], '')
-            print(get_average_by_manufacturer(data_manager.get_table_from_file(path), manufacturer))
+            manufacturer = ui.get_inputs(['Please add manufacturer to count: '], '')[0]
+            (get_average_by_manufacturer(data_manager.get_table_from_file(path), manufacturer))
         #elif option == '7':
         #    break
         else:
@@ -84,9 +83,8 @@ def add(table):
 # Remove the record having the id @id_ from the @list, than return @table
 def remove(table, id_):
     for line in table:
-        if line[0] == id_:
-            to_remove = table.index(line)
-            del table[to_remove]
+        if id_ in line:
+            table.remove(line)
     return table
 
 
@@ -99,8 +97,8 @@ def update(table, id_):
                    'Please enter price ',
                    'Enter how many is in stock ']
     for line in table:
-        update_list.append(line[0])
-    table[update_list.index(id_)] = [id_] + ui.get_inputs(list_titles, table)
+        if id_ in line:
+            line = [id_] + ui.get_inputs(list_titles, table)
     return table
 
 
@@ -125,7 +123,10 @@ def get_average_by_manufacturer(table, manufacturer):
     counter = 0
     in_stock_list = []
     for line in table:
-        if manufacturer[0] == line[2]:
+        if manufacturer == line[2]:
             counter += 1
             in_stock_list.append(int(line[4]))
-    return round(common.list_sum(in_stock_list) // counter)
+    if counter == 0:
+        return 'There is not any manufacturer with this name'
+    else:
+        return common.list_summa(in_stock_list) / counter
