@@ -10,15 +10,22 @@
 
 
 # importing everything you need
-import os, common
+import os
+import common
 from importlib.machinery import SourceFileLoader
 current_file_path = os.path.dirname(os.path.abspath(__file__))
 # User interface module
 ui = SourceFileLoader("ui", current_file_path + "/../ui.py").load_module()
 # data manager module
-data_manager = SourceFileLoader("data_manager", current_file_path + "/../data_manager.py").load_module()
+data_manager = SourceFileLoader(
+    "data_manager",
+    current_file_path +
+    "/../data_manager.py").load_module()
 # common module
-common = SourceFileLoader("common", current_file_path + "/../common.py").load_module()
+common = SourceFileLoader(
+    "common",
+    current_file_path +
+    "/../common.py").load_module()
 
 title = "selling manager"
 
@@ -52,7 +59,14 @@ def start():
         elif option == '5':
             get_lowest_price_item_id(table)
         elif option == '6':
-            get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to)
+            get_items_sold_between(
+                table,
+                month_from,
+                day_from,
+                year_from,
+                month_to,
+                day_to,
+                year_to)
         elif option == '0':
             break
         else:
@@ -73,15 +87,16 @@ def show_table(table):
     ui.print_table(table, list_titles)
 
 
-
-# Ask a new record as an input from the user than add it to @table, than return @table
+# Ask a new record as an input from the user than add it to @table, than
+# return @table
 def add(table):
     list_titles = ['title',
                    'price',
                    'month',
                    'day',
                    'year']
-    new_item = [common.generate_random(table)] + ui.get_inputs(list_titles, table)
+    new_item = [common.generate_random(
+        table)] + ui.get_inputs(list_titles, table)
     table.append(new_item)
 
     return table
@@ -114,7 +129,8 @@ def update(table, id_):
 
 # the question: What is the id of the item that sold for the lowest price ?
 # return type: string (id)
-# if there are more than one with the lowest price, return the first of descending alphabetical order
+# if there are more than one with the lowest price, return the first of
+# descending alphabetical order
 def get_lowest_price_item_id(table):
     smallest_prices = [[1, 1, 10000]]
     names = []
@@ -130,11 +146,16 @@ def get_lowest_price_item_id(table):
             return line[0]
 
 
-
-
 # the question: Which items are sold between two given dates ? (from_date < birth_date < to_date)
 # return type: list of lists (the filtered table)
-def get_items_sold_between(table, month_from, day_from, year_from, month_to, day_to, year_to):
+def get_items_sold_between(
+        table,
+        month_from,
+        day_from,
+        year_from,
+        month_to,
+        day_to,
+        year_to):
     from_date = int(str(year_from) + str(month_from) + str(day_from))
     to_date = int(str(year_from) + str(month_from) + str(day_from))
     results = []

@@ -12,12 +12,13 @@
 # title, ect.
 def print_to_center(item, half_column):
     if len(item) % 2 == 0:
-        begin_space = int(half_column - len(item)/2)
+        begin_space = int(half_column - len(item) / 2)
         end_space = begin_space
     else:
-        begin_space = int(half_column - (len(item)+1)/2)
+        begin_space = int(half_column - (len(item) + 1) / 2)
         end_space = begin_space + 1
-    print((' '* begin_space) + item + (' '*end_space) + '|',  end=(''))
+    print((' ' * begin_space) + item + (' ' * end_space) + '|', end=(''))
+
 
 def print_table(table, title_list):
     item_length = []
@@ -26,18 +27,17 @@ def print_table(table, title_list):
         for item in line:
             item_length.append(len(item))
     if max(item_length) % 2 == 0:
-        half_column = int((max(item_length) + 2)/2)
+        half_column = int((max(item_length) + 2) / 2)
     else:
-        half_column = int((max(item_length) + 3)/2)
+        half_column = int((max(item_length) + 3) / 2)
     print ('\n')
     for item in title_list:
         print_to_center(item, half_column)
-    print ('\n' + ('=' * (num_of_titles*(half_column*2 + 1))))
+    print ('\n' + ('=' * (num_of_titles * (half_column * 2 + 1))))
     for line in table:
         for item in line:
             print_to_center(item, half_column)
-        print ("\n" + (('-'*2*half_column) + '|')*num_of_titles)
-
+        print ("\n" + (('-' * 2 * half_column) + '|') * num_of_titles)
 
     pass
 
