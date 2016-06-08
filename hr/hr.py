@@ -35,10 +35,13 @@ def start():
             show_table(data_manager.get_table_from_file(path))
         elif option == 2:
             add(data_manager.get_table_from_file(path))
+            show_table(data_manager.get_table_from_file(path))
         elif option == 3:
+            show_table(data_manager.get_table_from_file(path))
             id_ = ui.get_inputs(["Please enter the ID, that you want to remove: "], "")
             remove(data_manager.get_table_from_file(path), id_)
         elif option == 4:
+            show_table(data_manager.get_table_from_file(path))
             id_ = ui.get_inputs(["Please enter the ID, that you want to update: "], "")
             update(data_manager.get_table_from_file(path), id_)
         elif option == 5:
