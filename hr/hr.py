@@ -125,27 +125,21 @@ def get_oldest_person(table):
 # the question: Who is the closest to the average age ?
 # return type: list of strings (name or names if there are two more with the same value)
 def get_persons_closest_to_average(table):
-    ages =[]
-    closest_ages = [[0, 0, 10000]]
-    results = []
-    for line in table:
-        ages.append(int(line[2]))
-    avg_age = common.list_summa(ages) / len(ages)
-    print (avg_age)
-    for line in table:
-        difference = int(line[2])-avg_age
-        if difference < 0:
-            difference = difference*(-1)
-        closest_dif = int(closest_ages[0][2])-avg_age
-        if closest_dif < 0:
-            closest_dif = closest_dif*(-1)
-        if difference < closest_dif:
-            closest_ages = [line]
-        elif difference == closest_dif:
-            closest_ages.append(line)
-    for line in closest_ages:
-        results.append(line[1])
-    return results
-
-
-    pass
+    average_age = 0
+    diff_list = []
+    result_list = []
+    minimum = 200
+    for x in range(len(table)):
+        average_age += int(table[x][2])
+    average_age /= len(table)
+    for y in range(len(table)):
+        diff_list.append([table[y][1], average_age - int(table[y][2])])
+        if diff_list[y][1] < 0:
+            diff_list[y][1] *= -1
+    for z in range(len(diff_list)):
+        if diff_list[z][1] < minimum:
+            minimum = diff_list[z][1]
+    for i in range(len(diff_list)):
+        if diff_list[i][1] == minimum:
+            result_list.append(diff_list[i][0])
+    return result_list
